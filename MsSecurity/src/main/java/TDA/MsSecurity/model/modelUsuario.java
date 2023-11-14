@@ -8,18 +8,18 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name="usuarios")
+@Table(name = "access")
 public class modelUsuario {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="idUSuario")
+    @Column(name = "id_user")
     public int idUsuario;
 
-    @Column(name="usuario")
+    @Column(name = "username")
     public String usuario;
 
-    @Column(name="clave")
+    @Column(name = "password")
     public String clave;
 
     public int getIdUsuario() {
@@ -45,8 +45,5 @@ public class modelUsuario {
     public void setClave(String clave) {
         this.clave = clave;
     }
-
-    
-
 
 }

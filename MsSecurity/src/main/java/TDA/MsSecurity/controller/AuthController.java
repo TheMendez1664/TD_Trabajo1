@@ -16,6 +16,7 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
+    // Obtener todos los usuarios
     @GetMapping
     public List<modelUsuario> get() {
         return authService.getAllUsers();
