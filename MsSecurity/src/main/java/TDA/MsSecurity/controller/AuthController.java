@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,11 +22,11 @@ public class AuthController {
     @Autowired
     AuthService authService;
 
-     // Obtener todos los usuarios
+    // Obtener todos los usuarios
     @GetMapping
     public List<modelUsuario> get() {
         return authService.getAllUsers();
-    }   
+    }
 
     // Actualizar usuario por ID
     @PutMapping("/update/{id}")
@@ -38,7 +39,7 @@ public class AuthController {
         }
         return null; // Regresa vacio si no hay usuario
     }
-    
+
     // Encontrar usuario por ID
     @GetMapping("/{id}")
     public modelUsuario getUserById(@PathVariable int id) {
@@ -55,4 +56,12 @@ public class AuthController {
         }
     }
 
+    // Crear un nuevo usuario
+    @PostMapping("/create")
+    public modelUsuario createUser(@RequestBody AuthRequest authRequest) {
+        modelUsuario newUser = new modelUsuario();
+        newUser.setUsuario(authRequest.getUsuario());
+        newUser.setClave(authRequest.getClave());
+        return authService.createUser(newUser);
+    }
 }
