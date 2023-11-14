@@ -14,8 +14,20 @@ public class AuthService {
     @Autowired
     IAuthRepository authRepository;
    
+    // Obtener todos los usuarios
     public List<modelUsuario>  getAllUsers() {       
         return (List<modelUsuario>) authRepository.findAll();
     }
    
+   // Actualizar usuario por ID
+   public modelUsuario updateUser(modelUsuario user) {
+    return authRepository.save(user);
+    }
+
+    // Encontrar usuario por ID
+    public modelUsuario getUserById(int id) {
+    return authRepository.findById(id).orElse(null);
+    }
+
+
 }
