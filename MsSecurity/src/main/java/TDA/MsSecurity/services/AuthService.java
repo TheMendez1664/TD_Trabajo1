@@ -1,6 +1,7 @@
 package TDA.MsSecurity.services;
 
 import java.util.List;
+import java.util.Optional;
  
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,5 +30,13 @@ public class AuthService {
     return authRepository.findById(id).orElse(null);
     }
 
+    public boolean deleteUser(int id) {
+        Optional<modelUsuario> user = authRepository.findById(id);
+        if (user.isPresent()) {
+            authRepository.delete(user.get());
+            return true;
+        }
+        return false;
+    }
 
 }
