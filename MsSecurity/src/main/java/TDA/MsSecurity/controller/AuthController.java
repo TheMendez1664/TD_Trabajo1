@@ -127,6 +127,6 @@ public class AuthController {
             // Manejar otras excepciones y devolver una respuesta 500 Internal Server Error con un mensaje genérico
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new ApiResponse<>(HttpStatus.INTERNAL_SERVER_ERROR.value(), 
             "Error al aliminar usuario", null));
-        }
-    }
+        }
+}
 }
