@@ -10,39 +10,36 @@ import TDA.MsSecurity.model.modelUsuario;
 import TDA.MsSecurity.repository.IAuthRepository;
 
 @Service
-public class AuthService {
+public class AuthService implements IAuthService{
 
     @Autowired
     IAuthRepository authRepository;
 
-    // Obtener todos los usuarios
-    public List<modelUsuario> getAllUsers() {
-        return (List<modelUsuario>) authRepository.findAll();
-    }
-
-    // Actualizar usuario por ID
-    public modelUsuario updateUser(modelUsuario user) {
+    @Override
+    public modelUsuario add(modelUsuario user) {
         return authRepository.save(user);
     }
 
-    // Encontrar usuario por ID
-    public modelUsuario getUserById(int id) {
-        return authRepository.findById(id).orElse(null);
+    @Override
+    public modelUsuario update(modelUsuario user) {
+        return authRepository.save(user);
     }
 
-    // Borrar usuario por ID
-    public boolean deleteUser(int id) {
-        Optional<modelUsuario> user = authRepository.findById(id);
-        if (user.isPresent()) {
-            authRepository.delete(user.get());
-            return true;
-        }
-        return false;
+    @Override
+    public boolean delete(int id) {        
+        authRepository.deleteById(id);
+        return true;
     }
 
-    // Crear un nuevo usuario
-    public modelUsuario createUser(modelUsuario newUser) {
-        return authRepository.save(newUser);
+    @Override
+    public List<modelUsuario> findAll() {
+        return (List<modelUsuario>) authRepository.findAll();
+    }
+
+    @Override
+    public modelUsuario findById(int id) {
+        Optional<modelUsuario> model = authRepository.findById(id);
+        return model.get();
     }
 
 }
